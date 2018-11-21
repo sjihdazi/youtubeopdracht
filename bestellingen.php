@@ -1,9 +1,10 @@
 <?php
 include 'dbconfig.php';
 
+
 if(isset($_GET['delete_id']))
 {
- $sql_query="DELETE FROM bestellingen WHERE Bestelnummer=".$_GET['delete_id'];
+ $sql_query="DELETE FROM videos WHERE Bestelnummer=".$_GET['delete_id'];
  mysql_query($sql_query);
  header("Location: $_SERVER[PHP_SELF]");
 }
@@ -12,7 +13,7 @@ if(isset($_GET['delete_id']))
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Video's</title>
+    <title>Bestellingen</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -25,7 +26,8 @@ if(isset($_GET['delete_id']))
 <body>
 
 <div class="jumbotron bg-1 text-center">
-    <h1>Youtube Video's</h1>
+    <h1>Seans Surfboards</h1>
+    <p>For all your custom surfboards</p>
 </div>
 
 <div class="container-fluid bg-2">
@@ -36,28 +38,30 @@ if(isset($_GET['delete_id']))
         <div class="col-sm-10">
             <h1>Bestellingen</h1>
             <br>
-            <table align="center">
+     <table align="center" class="col-md-12">
     <tr>
-    <th colspan="11"><a href="toevoegen.php">Voeg hier iemand toe</a></th>
+    <th colspan="12"><a href="index.php">Voeg hier iemand toe</a></th>
     </tr>
-    <th>Id</th>
+
 	<th>Artist</th>
     <th>Song Title</th>
     <th>PlaybackId</th>
+	
+
+  
 	<?php
-   $query = "SELECT ID , Artist , Song Title , PlaybackId" ;
+$query = "SELECT Artist , SongTitle , PlaybackId FROM videos" ;
 $result = mysqli_query($conn,$query);
 
 
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-        echo "<tr><td>" . $row["ID"]. "</td>
-			  <th> " . $row["Artist"]. "</th>
-			  <th> " . $row["Song Title"]. "</th>
-			  <th>" . $row["PlaybackId"]. "</th>"
+ echo "
+			  <td> " . $row["Artist"]. "</td>
+			  <td> " . $row["SongTitle"]. "</td>
+			  <td> <iframe width='300' height='300' src='https://www.youtube.com/embed/". $row['PlaybackId']." ' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe></td>"
 			  ?>
-			  <td align="center"><a href="javascript:edt_id('<?php echo $row[0]; ?>')"><img src="b_edit.jpg" height="20px" width="20px" align="EDIT" /></a></td>
-        <td align="center"><a href="javascript:delete_id('<?php echo $row[0]; ?>')"><img src="b_drop.png"  height="20px" width="20px" align="DELETE" /></a></td>
+			  
 		   	  <br></tr>
 			  <?php
 	}
