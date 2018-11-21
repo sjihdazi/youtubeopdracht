@@ -1,7 +1,31 @@
-<!DOCTYPE html>
+
+<?php
+
+include 'dbconfig.php';
+
+if(isset($_POST['btn-save'])) {
+
+    $Bestelnummer = $_POST['Bestelnummer'];
+    $Naam = $_POST['Naam'];
+    $Adres = $_POST['Adres'];
+    $Email = $_POST['Email'];
+    $Telefoon = $_POST['Telefoon'];
+    $Postcode = $_POST['Postcode'];
+    $Afmetingen = $_POST['Afmetingen'];
+    $Datumop = $_POST['Datumop'];
+    $Datumaf = $_POST['Datumaf'];
+
+
+    $sql = "INSERT INTO bestellingen(Bestelnummer, Naam, Adres, Email, Telefoon, Postcode, Afmetingen, Datumop, Datumaf)
+VALUES ('$Bestelnummer','$Naam','$Adres','$Email','$Telefoon','$Postcode','$Afmetingen','$Datumop','$Datumaf')";
+
+}
+
+?>
+<!DOCTYPE html>	
 <html lang="en">
 <head>
-    <title>Sean Surfboard</title>
+    <title>Bestelling toevoegen</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -24,46 +48,66 @@
 
         </div>
         <div class="col-sm-4">
-            <h1>Login</h1>
-            <form action="" method='post'>
+            <h1>Bestelling toevoegen</h1>
+            <br>
+            <a href="bestellingen.php">Bekijk hier de bestellingen</a>
+            <br>
+            <form method="post">
                 <div class="form-group">
-                    <label for="username">Gebruikersnaam:</label>
-                    <input name="username" class="form-control" id="username" placeholder="Gebruikersnaam">
+                    <label for="bestelnummer">Bestelnummer:</label>
+                    <input name="Bestelnummer" class="form-control" id="bestelnummer" placeholder="Bestelnummer" required>
                 </div>
                 <div class="form-group">
-                    <label for="pwd">Password:</label>
-                    <input name="password" type="password" class="form-control" id="pwd" placeholder="***********">
+                    <label for="naam">Naam:</label>
+                    <input name="Naam" class="form-control" id="naam" placeholder="Naam" required>
                 </div>
-                <input name="submit" type="submit" value=" Login ">
+                <div class="form-group">
+                    <label for="adres">Adres:</label>
+                    <input name="Adres" class="form-control" id="adres" placeholder="Adres" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" name="Email" class="form-control" id="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefoon">Telefoon:</label>
+                    <input name="Telefoon" class="form-control" id="telefoon" placeholder="Telefoonnummer" required>
+                </div>
+                <div class="form-group">
+                    <label for="postcode">Postcode:</label>
+                    <input name="Postcode" class="form-control" id="postcode" placeholder="Postcode" required>
+                </div>
+                <div class="form-group">
+                    <label for="afmetingen">Afmetingen:</label>
+                    <input name="Afmetingen" class="form-control" id="afmetingen" placeholder="Afmetingen" required>
+                </div>
+                <div class="form-group">
+                    <label for="datumop">Datumop:</label>
+                    <input name="Datumop" type="date" class="form-control" id="datumop" placeholder="Datum ophalen" required>
+                </div>
+                <div class="form-group">
+                    <label for="datumaf">Datumaf:</label>
+                    <input name="Datumaf" type="date" class="form-control" id="datumaf" placeholder="Datum afgeven" required>
+                </div>
+                <button type="submit" name="btn-save" class="btn btn-success">Toevoegen</button>
             </form>
-            <?php
-			
-			include 'dbconfig.php';
-			error_reporting(0);
-
-            if (isset($_POST['submit'])) {
-                $name = $_POST['username'];
-
-                $query = mysqli_query($conn,"SELECT * FROM gebruikers WHERE Gebruikers= '$name'");
-                $data = mysqli_fetch_array($query);
-
-                if($data == NULL){
-                    echo "Verkeerde gebruikersnaam";
-                }
-                if($_POST['password'] != $data['Wachtwoord'] && $data != NULL) {
-                    echo "Verkeerd wachtwoord!";
-                }
-                if($_POST['password'] == $data['Wachtwoord'] && $data != NULL) {
-                    header('Location: toevoegen.php');
-                }
-            }
-            ?>
         </div>
         <div class="col-sm-4">
 
         </div>
     </div>
 </div>
+    <br>
+<?php
+error_reporting(0);
+if ($conn->query($sql) === TRUE) {
+    echo "Bestelling is toegevoegd";
+} else {
+    echo "Deze data is al aangemaakt";
+}
+// sql query execution function
 
+
+?>
 </body>
 </html>
