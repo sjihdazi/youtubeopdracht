@@ -5,19 +5,15 @@ include 'dbconfig.php';
 
 if(isset($_POST['btn-save'])) {
 
-    $Bestelnummer = $_POST['Bestelnummer'];
-    $Naam = $_POST['Naam'];
-    $Adres = $_POST['Adres'];
-    $Email = $_POST['Email'];
-    $Telefoon = $_POST['Telefoon'];
-    $Postcode = $_POST['Postcode'];
-    $Afmetingen = $_POST['Afmetingen'];
-    $Datumop = $_POST['Datumop'];
-    $Datumaf = $_POST['Datumaf'];
+
+    $Artiest = $_POST['Artist'];
+    $SongTitle = $_POST['SongTitle'];
+    $PLaybackId = $_POST['PlaybackId'];
+    
 
 
-    $sql = "INSERT INTO bestellingen(Bestelnummer, Naam, Adres, Email, Telefoon, Postcode, Afmetingen, Datumop, Datumaf)
-VALUES ('$Bestelnummer','$Naam','$Adres','$Email','$Telefoon','$Postcode','$Afmetingen','$Datumop','$Datumaf')";
+    $sql = "INSERT INTO videos( Artist, SongTitle, PlaybackId)
+		VALUES ('$Artiest','$SongTitle ','$PLaybackId')";
 
 }
 
@@ -54,41 +50,18 @@ VALUES ('$Bestelnummer','$Naam','$Adres','$Email','$Telefoon','$Postcode','$Afme
             <br>
             <form method="post">
                 <div class="form-group">
-                    <label for="bestelnummer">Bestelnummer:</label>
-                    <input name="Bestelnummer" class="form-control" id="bestelnummer" placeholder="Bestelnummer" required>
+                    <label for="bestelnummer">Artiest:</label>
+                    <input name="Artist" class="form-control" id="bestelnummer" placeholder="Artiest" required>
                 </div>
                 <div class="form-group">
-                    <label for="naam">Naam:</label>
-                    <input name="Naam" class="form-control" id="naam" placeholder="Naam" required>
+                    <label for="naam">Songtitle:</label>
+                    <input name="SongTitle" class="form-control" id="naam" placeholder="Songtitle" required>
                 </div>
                 <div class="form-group">
-                    <label for="adres">Adres:</label>
-                    <input name="Adres" class="form-control" id="adres" placeholder="Adres" required>
+                    <label for="adres">PlaybackId:</label>
+                    <input name="PlaybackId" class="form-control" id="adres" placeholder="PlaybackId" required>
                 </div>
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" name="Email" class="form-control" id="email" placeholder="Email" required>
-                </div>
-                <div class="form-group">
-                    <label for="telefoon">Telefoon:</label>
-                    <input name="Telefoon" class="form-control" id="telefoon" placeholder="Telefoonnummer" required>
-                </div>
-                <div class="form-group">
-                    <label for="postcode">Postcode:</label>
-                    <input name="Postcode" class="form-control" id="postcode" placeholder="Postcode" required>
-                </div>
-                <div class="form-group">
-                    <label for="afmetingen">Afmetingen:</label>
-                    <input name="Afmetingen" class="form-control" id="afmetingen" placeholder="Afmetingen" required>
-                </div>
-                <div class="form-group">
-                    <label for="datumop">Datumop:</label>
-                    <input name="Datumop" type="date" class="form-control" id="datumop" placeholder="Datum ophalen" required>
-                </div>
-                <div class="form-group">
-                    <label for="datumaf">Datumaf:</label>
-                    <input name="Datumaf" type="date" class="form-control" id="datumaf" placeholder="Datum afgeven" required>
-                </div>
+                
                 <button type="submit" name="btn-save" class="btn btn-success">Toevoegen</button>
             </form>
         </div>
